@@ -1,0 +1,30 @@
+<template>
+  <name>%NAME%</name>
+  <disk>
+    <size>%DISKSIZE%</size>
+  </disk>
+  <os>
+    <name>CentOS-6</name>
+    <version>6</version>
+    <arch>x86_64</arch>
+    <install type='iso'>
+      <iso>file:///opt/vm2/CentOS-66x86_64-iso.iso</iso>
+    </install>
+    <kernelparam>console=tty0 console=ttyS0,115200n8</kernelparam>
+  </os>
+  <description>CentOS 6 Base install with cloud pkgs</description>
+  
+  <repositories>
+    <repository name='EPEL_RELEASE'>
+      <url>https://dl.fedoraproject.org/pub/epel/6/x86_64/</url>
+      <signed>False</signed>
+      <persisted>False</persisted>
+    </repository>
+  </repositories>
+
+  <commands>
+    <command name="Grab alces-image-init script and execute stage2">
+curl -L http://images.alces-software.com.s3.amazonaws.com/ruan/alces-image-init-stage2.sh | /bin/bash
+    </command>
+  </commands>
+</template>

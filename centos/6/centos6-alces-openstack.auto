@@ -1,0 +1,26 @@
+install
+text
+keyboard uk
+firstboot --disable
+lang en_GB
+skipx
+network --device eth0 --bootproto dhcp
+rootpw sqrt(s*w)
+firewall --disabled
+authconfig --enableshadow --enablemd5
+selinux --disabled
+timezone --utc Europe/London
+bootloader --location=mbr --append="console=tty0 console=ttyS0,115200"
+zerombr
+clearpart --all --drives=vda --initlabel
+
+part / --fstype ext4 --ondisk=vda --size=1024 --grow
+reboot
+
+%packages
+@core
+
+%end
+
+%post
+%end

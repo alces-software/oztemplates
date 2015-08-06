@@ -1,0 +1,63 @@
+<template>
+  <name>%NAME%</name>
+  <disk>
+    <size>%DISKSIZE%</size>
+  </disk>
+  <os>
+    <name>CentOS-6</name>
+    <version>6</version>
+    <arch>x86_64</arch>
+    <install type='iso'>
+      <iso>file:///opt/vm2/CentOS-66x86_64-iso.iso</iso>
+    </install>
+    <kernelparam>console=tty0 console=ttyS0,115200n8</kernelparam>
+  </os>
+  <description>CentOS 6 Base install with cloud pkgs</description>
+  
+  <repositories>
+    <repository name='EPEL_RELEASE'>
+      <url>https://dl.fedoraproject.org/pub/epel/6/x86_64/</url>
+      <signed>False</signed>
+      <persisted>False</persisted>
+    </repository>
+  </repositories>
+
+  <packages>
+    <package name='git'/>
+    <package name='parted'/>
+    <package name='gnome-desktop'/>
+    <package name='gnome-session'/>
+    <package name='gnome-panel'/>
+    <package name='nautilus'/>
+    <package name='xorg-x11-xinit'/>
+    <package name='urw-fonts'/>
+    <package name='lzo'/>
+    <package name='libyaml'/>
+    <package name='curl'/>
+    <package name='fold'/>
+    <package name='mktemp'/>
+    <package name='tar'/>
+    <package name='crontab'/>
+    <package name='stat'/>
+    <package name='gzip'/>
+    <package name='base64'/>
+    <package name='tail'/>
+    <package name='xauth'/>
+    <package name='xlsclients'/>
+    <package name='xterm'/>
+    <package name='perl'/>
+    <package name='ntp'/>
+    <package name='xorg-x11-server-utils'/>
+    <package name='sysstat'/>
+    <package name='xorg-x11-fonts-misc'/>
+    <package name='tmux'/>
+  </packages>
+  <commands>
+    <command name="Grab alces-image-init script and execute stage1">
+curl -L http://images.alces-software.com.s3.amazonaws.com/ruan/alces-image-init.sh | /bin/bash
+    </command>
+    <command name="Grab alces-image-init script and execute stage1.5">
+curl -L http://images.alces-software.com.s3.amazonaws.com/ruan/alces-image-init-stage1-5.sh | /bin/bash
+    </command>
+  </commands>
+</template>
