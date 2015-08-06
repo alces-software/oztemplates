@@ -108,6 +108,9 @@ fi
 
 TDL=/tmp/tdl.$$
 
+echo oz-install -d3 -u $TDL -x $POOL_PATH/$IMAGE_NAME.xml -p -a $DIR/centos6-alces-openstack.auto -c $OZ_CONFIG 1> $LOGDIR 2>&1
+
+
 sed -e "s|%DISKSIZE%|$IMAGE_SIZE|g"  \
     -e "s|%NAME%|$IMAGE_NAME|g" $DIR/centos6-alces-openstack.tdl.template > $TDL
 #Install to stage 1 - ready for installing software

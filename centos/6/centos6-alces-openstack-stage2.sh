@@ -28,9 +28,12 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
 PARENTPID=$$
-POOL_PATH=/opt/vm2
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source $DIR/../../etc/vars
+
+echo $IMAGE_NAME
 
 trap "/bin/kill -- -$BASHPID &>/dev/null" EXIT INT TERM
 
@@ -106,6 +109,8 @@ say_done 0
 
 TDL=/tmp/tdl.$$
 
+sed -i -r -e 's/(on_reboot.*|on_crash.*)destroy/\1restart/g' $POOL_PATH/$IMAGE_NAME.xml
+
 sed -e "s|%DISKSIZE%|$IMAGE_SIZE|g"  \
     -e "s|%NAME%|$IMAGE_NAME|g" $DIR/centos6-alces-openstack-stage2.tdl.template > $TDL
 #Install to stage 1 - ready for installing software
@@ -116,14 +121,21 @@ say_done $?
 #virt-sysprep -a $POOL_PATH/$IMAGE_NAME.qcow2
 
 title 'Preparing for Openstack'
-#doing 'Cleaning Image'
-#say_done $?
-#doing 'Booting image'
-#virsh start $IMAGE_NAME 1> $LOGDIR 2>&1
-#say_done $?
-#doing 'Connecting console'
-#screen -S alces-imageinit.$PARENTPID -d -m virsh console $IMAGE_NAME 1> $LOGDIR 2>&1
-#say_done $?
+doing 'Cleaning Image (virt-sysprep)'
+virt-sysprep -a $POOL_PATH/$IMAGE_NAME.qcow2 1> $LOGDIR 2>&1
+say_done $?
+doing 'Sparsifying & Compressing Image'
+virt-sparsify --compress --format qcow2 $POOL_PATH/$IMAGE_NAME.qcow2 $POOL_PATH/$IMAGE_NAME.compressed.qcow2 1> $LOGDIR 2>&1
+say_done $?
+
+#while true; do
+#    read -p "Do you wish to keep the un-compressed image?" yn
+#    case $yn in
+#        [Yy]* ) sleep 1;;
+#        [Nn]* ) rm -rf $POOL_PATH/$IMAGE_NAME.qcow2;;
+#        * ) echo "Please answer yes or no.";;
+#    esac
+#done
 
 printf "
 ${GREEN}===============================================================================
