@@ -51,6 +51,7 @@
     <package name='sysstat'/>
     <package name='xorg-x11-fonts-misc'/>
     <package name='tmux'/>
+    <package name='patch'/>
   </packages>
   <commands>
     <command name="Grab alces-image-init script and execute stage1">
