@@ -55,10 +55,10 @@
   </packages>
   <commands>
     <command name="Grab alces-image-init script and execute stage1">
-curl -L http://images.alces-software.com.s3.amazonaws.com/ruan/alces-image-init.sh | /bin/bash
+curl -L https://raw.githubusercontent.com/alces-software/oztemplates/ruan-openstack/image-init/bin/alces-image-init.sh | /bin/bash
     </command>
     <command name="Grab alces-image-init script and execute stage1.5">
-curl -L http://images.alces-software.com.s3.amazonaws.com/ruan/alces-image-init-stage1-5.sh | /bin/bash
+curl -L https://raw.githubusercontent.com/alces-software/oztemplates/ruan-openstack/image-init/bin/alces-image-init-stage1-5.sh | /bin/bash
     </command>
   </commands>
 </template>

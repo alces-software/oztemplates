@@ -24,7 +24,7 @@
 
   <commands>
     <command name="Grab alces-image-init script and execute stage2">
-curl -L http://images.alces-software.com.s3.amazonaws.com/ruan/alces-image-init-stage2.sh | /bin/bash
+curl -L https://raw.githubusercontent.com/alces-software/oztemplates/ruan-openstack/image-init/bin/alces-image-init-stage2.sh | /bin/bash
     </command>
   </commands>
 </template>
