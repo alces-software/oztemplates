@@ -39,8 +39,13 @@ fi
 INTERNAL_BRIDGE='build.sfn'
 EXTERNAL_BRIDGE='dmz'
 
+NAME=$1
+VERS=$2
+
+if [ -z "$NAME" ] || [ -z "$VERS" ]; then
+  exit 1;
+fi
+
 #SYMPHONY-DIRECTOR
-virt-clone --original-xml=$BASE_IMAGE --name=symphony-director-v1.0 --file=$POOL_PATH/symphony-director-v1.0.qcow2 --force-copy=vda
-virt-clone --original-xml=$BASE_IMAGE --name=symphony-monitor-v1.0 --file=$POOL_PATH/symphony-monitor-v1.0.qcow2 --force-copy=vda
-virt-clone --original-xml=$BASE_IMAGE --name=symphony-repo-v1.0 --file=$POOL_PATH/symphony-repo-v1.0.qcow2 --force-copy=vda
+virt-clone --original-xml=$BASE_IMAGE --name=$NAME-$VERS --file=$POOL_PATH/$NAME-$VERS.qcow2 --force-copy=vda
 
